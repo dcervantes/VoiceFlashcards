@@ -36,19 +36,7 @@ VoiceFlashcards es una aplicación web que permite cargar una hoja de cálculo c
    ```
 3. **Abre el archivo `index.html` en Google Chrome**.
 
-## Contribución
-
-Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
-
-1. Haz un fork del repositorio.
-2. Crea una nueva rama (`git checkout -b feature-nueva-funcionalidad`).
-3. Realiza tus cambios y haz commit de los mismos (`git commit -am 'Añadir nueva funcionalidad'`).
-4. Sube los cambios a tu rama (`git push origin feature-nueva-funcionalidad`).
-5. Crea un Pull Request.
-
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para obtener más detalles.
 ```
-
-Asegúrate de ajustar el enlace de clonación de GitHub y cualquier otra información específica según sea necesario.

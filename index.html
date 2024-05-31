@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,9 +17,59 @@
             font-family: Arial, sans-serif;
             margin: 0;
         }
+
         h1 {
             color: #ffffff;
         }
+
+        #settings-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         #flashcard {
             font-size: 2em;
             text-align: center;
@@ -34,40 +85,51 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s, border-color 0.3s;
         }
+
         #flashcard.correct {
             border-color: #28a745;
             transform: scale(1.1);
         }
+
         #flashcard.incorrect {
             border-color: #dc3545;
             transform: scale(1.1);
         }
-        .buttons, .input-section {
+
+        .buttons,
+        .input-section {
             display: flex;
             justify-content: center;
             margin: 20px;
         }
-        button, input {
+
+        button,
+        input {
             padding: 10px 20px;
-            font-size: 1em;
             margin: 0 10px;
         }
+
         button {
             background-color: #007bff;
             color: #fff;
             border: none;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 2em;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         input {
             border: 2px solid #444;
             width: 60%;
             background-color: #1f1f1f;
             color: #fff;
+            font-size: 1em;
         }
+
         #start-rec-btn {
             background-color: #28a745;
             border-radius: 50%;
@@ -78,12 +140,15 @@
             justify-content: center;
             padding: 0;
         }
+
         #start-rec-btn:hover {
             background-color: #218838;
         }
+
         #start-rec-btn i {
             font-size: 24px;
         }
+
         #recognized-text {
             margin-top: 10px;
             font-size: 1.2em;
@@ -93,32 +158,42 @@
     </style>
     <audio id="correct-sound" src="correct-sound.mp3"></audio>
     <audio id="incorrect-sound" src="incorrect-sound.mp3"></audio>
-    
+
 </head>
+
 <body>
     <h1>VoiceFlashcards</h1>
     <div id="progress-bar">
         <div id="progress"></div>
     </div>
-    
-    <input type="file" id="file-input" accept=".xlsx, .xls, .csv"/>
+    <button id="settings-btn" onclick="toggleSettings()">⚙️</button>
+    <div id="settings-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="toggleSettings()">&times;</span>
+            <h2>Configuración</h2>
+            <!-- Agrega aquí cualquier contenido de configuración -->
+        </div>
+    </div>
+    <input type="file" id="file-input" accept=".xlsx, .xls, .csv" />
     <div id="flashcard">Por favor, carga una hoja de cálculo</div>
     <div id="recognized-text"></div>
     <div class="input-section">
         <button id="start-rec-btn" onclick="toggleRecognition()">🎤</button>
-
+        
     </div>
     <div class="buttons">
-        <button id="prev-btn" onclick="showPrev()">Anterior</button>
-        <button id="next-btn" onclick="showNext()">Siguiente</button>
+        <button id="prev-btn" onclick="showPrev()">⏮️</button>
+        <button id="play-phrase-btn" onclick="playPhrase()">🔊</button>
+        <button id="next-btn" onclick="showNext()">⏭️</button>
     </div>
     <div id="stats">
         Correctas: <span id="correct-count">0</span> | Errores: <span id="error-count">0</span>
-    </div>    
+    </div>
     <!-- Incluimos la librería xlsx.js para manejar archivos de Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
     <!-- Incluimos la librería de Font Awesome desde un CDN alternativo -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMK1gF9w0e51yS0fXtB5V1JQ6Vp6CVj2D4B4b4f" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMK1gF9w0e51yS0fXtB5V1JQ6Vp6CVj2D4B4b4f" crossorigin="anonymous">
     <script>
         let currentIndex = 0;
         let phrases = [];
@@ -131,18 +206,18 @@
             const file = event.target.files[0];
             const reader = new FileReader();
 
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 const data = new Uint8Array(event.target.result);
-                const workbook = XLSX.read(data, {type: 'array'});
+                const workbook = XLSX.read(data, { type: 'array' });
 
                 const firstSheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[firstSheetName];
-                
-                const jsonSheet = XLSX.utils.sheet_to_json(worksheet, {header: 1});
-                
+
+                const jsonSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
                 // Extraemos la segunda columna
                 phrases = jsonSheet.map(row => row[1]).filter(item => item);
-                
+
                 // Mostramos la primera frase
                 if (phrases.length > 0) {
                     currentIndex = 0;
@@ -198,12 +273,12 @@
             recognition.interimResults = true;
             recognition.maxAlternatives = 1;
 
-            recognition.onstart = function() {
+            recognition.onstart = function () {
                 recognizing = true;
                 document.getElementById('start-rec-btn').style.backgroundColor = '#dc3545';
             };
 
-            recognition.onend = function() {
+            recognition.onend = function () {
                 if (recognizing) {
                     recognition.start();
                 } else {
@@ -211,7 +286,7 @@
                 }
             };
 
-            recognition.onresult = function(event) {
+            recognition.onresult = function (event) {
                 let interimTranscript = '';
                 let finalTranscript = '';
                 for (let i = 0; i < event.results.length; i++) {
@@ -226,7 +301,7 @@
                 document.getElementById('recognized-text').textContent = interimTranscript || finalTranscript;
             };
 
-            recognition.onerror = function(event) {
+            recognition.onerror = function (event) {
                 alert("Error en el reconocimiento de voz: " + event.error);
             };
 
@@ -246,6 +321,19 @@
                 setTimeout(() => flashcard.classList.remove('incorrect'), 300);
             }
         }
+
+        function playPhrase() {
+            const msg = new SpeechSynthesisUtterance(phrases[currentIndex]);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+
+        function toggleSettings() {
+            const popup = document.getElementById('settings-popup');
+            popup.style.display = (popup.style.display === 'block') ? 'none' : 'block';
+        }
+
     </script>
 </body>
+
 </html>
