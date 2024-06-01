@@ -39,13 +39,12 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s, border-color 0.3s;
 }
-#flashcard.correct {
-    border-color: #28a745;
-    transform: scale(1.1);
+.flashcard.correct {
+    border: 3px solid green;
 }
-#flashcard.incorrect {
-    border-color: #dc3545;
-    transform: scale(1.1);
+
+.flashcard.incorrect {
+    border: 3px solid red;
 }
 .buttons, .input-section {
     display: flex;
@@ -86,6 +85,13 @@ input {
 #start-rec-btn:hover {
     background-color: #218838;
 }
+
+#start-rec-btn.recording {
+    background-color: red; /* Cambia esto al color que prefieras */
+    color: white;
+    border: 2px solid white; /* Añade un borde para mayor visibilidad */
+}
+
 #recognized-text {
     margin-top: 10px;
     font-size: 1.2em;

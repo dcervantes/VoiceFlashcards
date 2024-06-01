@@ -4,7 +4,6 @@ let correctCount = 0;
 let errorCount = 0;
 let startTime;
 let timerInterval;
-let recognition;
 let currentLanguage = 'en-US'; // Idioma por defecto
 
 document.addEventListener('DOMContentLoaded', function() {

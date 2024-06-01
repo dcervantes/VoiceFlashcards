@@ -1,4 +1,15 @@
 let recognizing = false;
+let recognition;
+const correctSound = new Audio('sounds/correct.mp3');
+const errorSound = new Audio('sounds/error.mp3');
+
+correctSound.onerror = function() {
+    console.error('Error loading correct sound');
+};
+
+errorSound.onerror = function() {
+    console.error('Error loading error sound');
+};
 
 if (!('webkitSpeechRecognition' in window)) {
     alert("Esta aplicación sólo funciona en Google Chrome.");
@@ -19,8 +30,9 @@ if (!('webkitSpeechRecognition' in window)) {
     recognition.onend = function() {
         recognizing = false;
         document.getElementById('start-rec-btn').classList.remove('recording');
+        // Restart recognition if there are more phrases to process
         if (currentIndex < phrases.length - 1) {
-            recognition.start();
+            setTimeout(() => recognition.start(), 1000); // Delay to avoid capturing TTS
         }
     };
 
@@ -38,6 +50,8 @@ if (!('webkitSpeechRecognition' in window)) {
 }
 
 function toggleRecognition() {
+    if (!recognition) return;
+    
     if (recognizing) {
         recognition.stop();
         return;
@@ -46,21 +60,42 @@ function toggleRecognition() {
     recognition.start();
 }
 
+function normalizeString(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[.,!?¿]/g, '').toLowerCase();
+}
+
 function checkPhrase(transcript) {
     const flashcard = document.getElementById('flashcard').textContent.trim().toLowerCase();
-    const userPhrase = transcript.toLowerCase().replace(/[.,!?]/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    const normalizedFlashcard = flashcard.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const normalizedFlashcard = normalizeString(flashcard);
+    const userPhrase = normalizeString(transcript);
 
     if (userPhrase === normalizedFlashcard) {
         document.getElementById('flashcard').classList.add('correct');
+        correctSound.play().catch(error => {
+            console.error('Error playing correct sound:', error);
+        });
         correctCount++;
         showNext();
     } else {
         document.getElementById('flashcard').classList.add('incorrect');
+        errorSound.play().catch(error => {
+            console.error('Error playing error sound:', error);
+        });
         errorCount++;
         setTimeout(() => {
             document.getElementById('flashcard').classList.remove('incorrect');
         }, 1000);
     }
     updateStats();
+}
+
+function playPhrase() {
+    recognition.stop();
+    const flashcard = document.getElementById('flashcard').textContent;
+    const utterance = new SpeechSynthesisUtterance(flashcard);
+    utterance.lang = currentLanguage;
+    utterance.onend = function() {
+        setTimeout(() => recognition.start(), 1000); // Delay to avoid capturing TTS
+    };
+    speechSynthesis.speak(utterance);
 }
