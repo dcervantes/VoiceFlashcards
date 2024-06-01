@@ -1,0 +1,235 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+h1 {
+    color: #ffffff;
+}
+#progress-bar {
+    height: 20px;
+    background-color: #444;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#progress {
+    height: 100%;
+    width: 0;
+    background-color: #28a745;
+}
+#flashcard {
+    font-size: 2em;
+    text-align: center;
+    margin: 20px;
+    border: 2px solid #444;
+    padding: 20px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f1f1f;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, border-color 0.3s;
+}
+#flashcard.correct {
+    border-color: #28a745;
+    transform: scale(1.1);
+}
+#flashcard.incorrect {
+    border-color: #dc3545;
+    transform: scale(1.1);
+}
+.buttons, .input-section {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+button, input {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 0 10px;
+}
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #0056b3;
+}
+input {
+    border: 2px solid #444;
+    width: 60%;
+    background-color: #1f1f1f;
+    color: #fff;
+}
+#start-rec-btn {
+    background-color: #28a745;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+#start-rec-btn:hover {
+    background-color: #218838;
+}
+#recognized-text {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #ccc;
+    text-align: center;
+}
+#settings-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+.popup-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#stats {
+    margin: 20px;
+    text-align: center;
+}
+#timer {
+    font-size: 1.2em;
+}
+
+.step {
+    display: none; /* Ocultar todos los pasos por defecto */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    opacity: 0; /* Inicialmente transparente */
+    transform: translate(-50%, -50%) translateY(20px); /* Desplazar hacia abajo inicialmente */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Transiciones suaves */
+    position: absolute; /* Posicionar absolutamente para evitar scrollbars */
+    top: 50%;
+    left: 50%;
+}
+
+.step.active {
+    display: flex; /* Mostrar el paso activo */
+    opacity: 1; /* Opacidad completa */
+    transform: translate(-50%, -50%) translateY(0); /* Sin desplazamiento */
+}
+
+@media (min-width: 768px) {
+    .step {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .step {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .step {
+        width: 60%;
+    }
+}
+
+.csv-options-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.csv-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 10px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.csv-option:hover {
+    background-color: #333;
+    transform: scale(1.05);
+}
+
+.csv-option span {
+    font-size: 2.5em;
+}
+
+.csv-option p {
+    margin: 10px 0 0;
+    color: #fff;
+    font-size: 1em;
+}
+
+.file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
