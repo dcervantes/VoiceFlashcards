@@ -18,13 +18,13 @@ VoiceFlashcards is a web application designed to help users practice language ph
 To run the project locally, follow these steps:
 
 1. Clone the repository:
-   \`\`\`sh
+   ```sh
    git clone https://github.com/yourusername/voiceflashcards.git
-   \`\`\`
+   ```
 2. Navigate to the project directory:
-   \`\`\`sh
+   ```sh
    cd voiceflashcards
-   \`\`\`
+   ```
 3. Open \`index.html\` in your preferred web browser.
 
 ## Usage
@@ -42,7 +42,7 @@ The CSV file should have the following format:
 - The second column should contain the phrase.
 
 Example:
-\`\`\`csv
+```csv
 Level,Phrase
 A1,Hello
 A2,How are you?
@@ -50,7 +50,7 @@ B1,What is your name?
 B2,Where do you live?
 C1,Can you help me with this?
 C2,This is a complex situation.
-\`\`\`
+```
 
 ## Screenshots
 
