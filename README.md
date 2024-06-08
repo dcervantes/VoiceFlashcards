@@ -52,6 +52,35 @@ C1,Can you help me with this?
 C2,This is a complex situation.
 ```
 
+## Generating CSV with ChatGPT
+
+You can generate a CSV file with phrases using ChatGPT. Below are the steps and an example prompt to generate a CSV file of phrases in English.
+
+### Example Prompt to Generate a CSV of Phrases in English
+
+```
+Generate a CSV file with 20 phrases for each level (A1, A2, B1, B2, C1, C2) in English. The CSV should have two columns: Level and Phrase.
+```
+
+### Steps to Generate a CSV with ChatGPT
+
+1. **Prompt ChatGPT**: Use the example prompt above or create your own prompt to ask ChatGPT to generate phrases.
+2. **Review and Edit**: Review the generated phrases and make any necessary edits.
+3. **Format as CSV**: Ensure the output is formatted correctly as a CSV file with the required columns.
+4. **Download CSV**: Download the generated CSV file from ChatGPT.
+
+### Generating a CSV Based on a Document
+
+If you have a document with phrases and levels, you can use ChatGPT to generate a CSV file based on that document.
+
+1. **Upload Document**: Upload your document containing the phrases and levels to ChatGPT.
+2. **Prompt ChatGPT**: Use a prompt like the following:
+   ```
+   Based on the uploaded document, generate a CSV file with the phrases and their corresponding levels. The CSV should have two columns: Level and Phrase.
+   ```
+3. **Review and Edit**: Review the generated CSV content and make any necessary edits.
+4. **Download CSV**: Download the generated CSV file from ChatGPT.
+
 ## Screenshots
 
 *Add relevant screenshots of your application here.*
