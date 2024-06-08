@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoiceFlashcards</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <div id="step-1" class="step active">
+    <div id="step-1" class="step active" style="display: none;">
         <h1>Seleccionar Archivo CSV</h1>
         <div class="csv-options-container">
             <div class="csv-option" onclick="handlePresetFileSelect('data/english_phrases.csv', 'en-US')">
@@ -35,7 +37,8 @@
                     <span role="img" aria-label="Upload">📤</span>
                     <p>Subir archivo CSV</p>
                 </label>
-                <input type="file" id="file-input" accept=".xlsx, .xls, .csv" style="display: none;" onchange="handleFileSelect(event)">
+                <input type="file" id="file-input" accept=".xlsx, .xls, .csv" style="display: none;"
+                    onchange="handleFileSelect(event)">
             </div>
         </div>
     </div>
@@ -44,7 +47,7 @@
         <h1>Configuración de Flashcards</h1>
         <label for="num-flashcards">Número de Flashcards:</label>
         <input type="number" id="num-flashcards" min="1" value="10" class="centered-input">
-    
+
         <h2>Niveles a Incluir:</h2>
         <div class="slider-container">
             <div id="level-labels">
@@ -52,34 +55,33 @@
             </div>
             <input type="range" id="level-slider" min="1" max="6" value="6" oninput="updateLevels(this.value)">
         </div>
-    
+
         <button onclick="goToStep1()">Volver</button> <!-- Botón "Volver" -->
         <button onclick="goToStep2()">Comenzar</button> <!-- Botón "Comenzar" -->
     </div>
-               
+
 
     <div id="step-2" class="step" style="display: none;">
         <div id="progress-bar">
             <div id="progress"></div>
         </div>
-        <div id="timer">Tiempo: 0:00</div>
+
         <div id="flashcard-container">
             <div id="flashcard-level"></div> <!-- Contenedor para el nivel -->
-            <div id="flashcard">Por favor, carga una hoja de cálculo</div>
+            <div id="flashcard">
+                <div id="countdown" style="display: none;">3</div>
+            </div>
         </div>
         <div id="recognized-text"></div>
         <div class="input-section">
             <button id="start-rec-btn" onclick="toggleRecognition()">🎤</button>
             <button id="play-phrase-btn" onclick="playPhrase()">🔊</button>
         </div>
-        <div class="buttons">
-            <button id="prev-btn" onclick="showPrev()">Anterior</button>
-            <button id="next-btn" onclick="showNext()">Siguiente</button>
-        </div>
         <div id="stats">
             Correctas: <span id="correct-count">0</span> | Errores: <span id="error-count">0</span>
         </div>
     </div>
+
 
     <div id="step-3" class="step" style="display: none;">
         <h1>Resultados</h1>
@@ -90,11 +92,12 @@
         <button onclick="regeneratePhrases()">Nuevo intento</button> <!-- Nuevo botón -->
         <button onclick="restart()">Salir</button> <!-- Actualizar texto del botón -->
     </div>
-    
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
     <script src="js/recognition.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

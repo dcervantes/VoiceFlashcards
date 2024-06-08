@@ -3,11 +3,11 @@ let currentIndex = 0;
 let correctCount = 0;
 let errorCount = 0;
 let startTime;
-let timerInterval;
 let currentLanguage = 'en-US'; // Idioma por defecto
 let allPhrases = []; // Para almacenar todas las frases del CSV
 
 document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('step-1').style.display = 'flex';
     document.getElementById('file-input').addEventListener('change', handleFileSelect, false);
 });
 
@@ -108,14 +108,70 @@ function goToStep2() {
     const nextStep = document.getElementById('step-2');
     nextStep.style.display = 'flex';
     setTimeout(() => nextStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
-    
+
+    document.getElementById('progress-bar').style.display = 'block'; // Mostrar la barra de progreso
+
     currentIndex = 0;
     correctCount = 0;
     errorCount = 0;
     updateStats();
-    showPhrase();
-    resetTimer();
+    startCountdown(); // Iniciar la cuenta regresiva
 }
+
+function startCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.style.display = 'block';
+    let countdown = 3;
+    countdownElement.textContent = countdown;
+
+    const countdownInterval = setInterval(() => {
+        countdown--;
+        if (countdown > 0) {
+            countdownElement.textContent = countdown;
+        } else {
+            clearInterval(countdownInterval);
+            countdownElement.style.display = 'none';
+            showPhrase(); // Mostrar la primera frase
+        }
+    }, 1000);
+}
+
+function showPhrase() {
+    const flashcard = document.getElementById('flashcard');
+    const flashcardLevel = document.getElementById('flashcard-level');
+    const currentPhrase = phrases[currentIndex];
+
+    flashcard.textContent = currentPhrase.phrase;
+    flashcard.className = ''; // Clear previous class
+
+    if (currentPhrase.level) {
+        flashcardLevel.textContent = currentPhrase.level; // Mostrar el nivel de la frase
+        flashcardLevel.style.display = 'block';
+    } else {
+        flashcardLevel.textContent = '';
+        flashcardLevel.style.display = 'none';
+    }
+
+    updateProgress();
+    document.getElementById('recognized-text').textContent = '';
+}
+
+function playPhrase() {
+    const currentPhrase = phrases[currentIndex].phrase;
+    const utterance = new SpeechSynthesisUtterance(currentPhrase);
+    utterance.lang = currentLanguage;
+    window.speechSynthesis.speak(utterance);
+}
+
+function toggleRecognition() {
+    if (recognizing) {
+        recognition.stop();
+        return;
+    }
+    recognition.lang = currentLanguage;
+    recognition.start();
+}
+
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -136,19 +192,6 @@ function nextStep() {
     setTimeout(() => nextStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
 }
 
-function showPhrase() {
-    const flashcard = document.getElementById('flashcard');
-    const flashcardLevel = document.getElementById('flashcard-level');
-    const currentPhrase = phrases[currentIndex];
-
-    flashcard.textContent = currentPhrase.phrase;
-    flashcard.className = ''; // Clear previous class
-    flashcardLevel.textContent = currentPhrase.level; // Mostrar el nivel de la frase
-
-    updateProgress();
-    document.getElementById('recognized-text').textContent = '';
-}
-
 function showPrev() {
     if (currentIndex > 0) {
         currentIndex--;
@@ -161,7 +204,6 @@ function showNext() {
         currentIndex++;
         showPhrase();
     } else {
-        stopTimer();
         if (recognition) {
             recognition.stop();
         }
@@ -198,7 +240,6 @@ function retry() {
     errorCount = 0;
     updateStats();
     showPhrase();
-    resetTimer();
     const retryStep = document.getElementById('step-2');
     retryStep.style.display = 'flex';
     setTimeout(() => retryStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
@@ -244,21 +285,6 @@ function updateStats() {
     document.getElementById('error-count').textContent = errorCount;
 }
 
-function startTimer() {
-    startTime = Date.now();
-    timerInterval = setInterval(function() {
-        const elapsedTime = Date.now() - startTime;
-        const minutes = Math.floor(elapsedTime / 60000);
-        const seconds = Math.floor((elapsedTime % 60000) / 1000);
-        document.getElementById('timer').textContent = `Tiempo: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }, 1000);
-}
 
-function stopTimer() {
-    clearInterval(timerInterval);
-}
 
-function resetTimer() {
-    document.getElementById('timer').textContent = 'Tiempo: 0:00';
-    stopTimer();
-}
+

@@ -61,7 +61,15 @@ function toggleRecognition() {
 }
 
 function normalizeString(str) {
-    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[.,!?¿]/g, '').toLowerCase();
+    return str.toLowerCase()
+              .replace(/á/g, 'a')
+              .replace(/é/g, 'e')
+              .replace(/í/g, 'i')
+              .replace(/ó/g, 'o')
+              .replace(/ú/g, 'u')
+              .replace(/[^\w\s]|_/g, '')
+              .replace(/\s+/g, ' ')
+              .replace(/-/g, ' '); // Añadir esta línea para reemplazar el carácter '-'
 }
 
 function checkPhrase(transcript) {
