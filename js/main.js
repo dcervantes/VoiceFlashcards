@@ -8,8 +8,37 @@ let allPhrases = []; // Para almacenar todas las frases del CSV
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('step-1').style.display = 'flex';
-    document.getElementById('file-input').addEventListener('change', handleFileSelect, false);
 });
+
+function showUploadPopup() {
+    document.getElementById('upload-popup').style.display = 'flex';
+}
+
+function closeUploadPopup() {
+    document.getElementById('upload-popup').style.display = 'none';
+}
+
+function handleFileSelectFromPopup() {
+    const fileInput = document.getElementById('file-input-popup');
+    const selectedFile = fileInput.files[0];
+    const selectedLanguage = document.getElementById('language-select').value;
+
+    if (selectedFile) {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            const decoder = new TextDecoder('utf-8');
+            const text = decoder.decode(event.target.result);
+            const workbook = XLSX.read(text, {type: 'string'});
+            processWorkbook(workbook);
+            currentLanguage = selectedLanguage;
+            goToStep1_5();
+        };
+
+        reader.readAsArrayBuffer(selectedFile);
+    }
+    closeUploadPopup();
+}
 
 function handleFileSelect(event) {
     const file = event.target.files[0];

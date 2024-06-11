@@ -138,27 +138,6 @@ input {
     cursor: pointer;
     color: #ffffff;
 }
-.popup {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
-    padding-top: 60px;
-}
-.popup-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-}
 .close {
     color: #aaa;
     float: right;
@@ -308,6 +287,74 @@ input {
     font-weight: bold;
     color: #fff;
 }
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.popup-content {
+    background-color:  #444;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%; /* Cambiar a un porcentaje más grande para pantallas pequeñas */
+    max-width: 400px; /* Ancho máximo para pantallas más grandes */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
 
+.popup-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
 
+.popup-content label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.popup-content select {
+    display: block;
+    width: calc(100% - 20px); /* Reducir el ancho total para agregar margen interno */
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10px; /* Agregar margen a la izquierda */
+    margin-right: 10px; /* Agregar margen a la derecha */
+}
+
+.popup-content input[type="file"] {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 10px; /* Agregar margen a la izquierda */
+    margin-right: 10px; /* Agregar margen a la derecha */
+}
+
+.popup-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background-color: #45a049;
+}

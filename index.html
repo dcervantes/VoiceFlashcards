@@ -32,13 +32,9 @@
                 <span role="img" aria-label="French">🇫🇷</span>
                 <p>French Phrases</p>
             </div>
-            <div class="csv-option">
-                <label for="file-input" class="file-label">
-                    <span role="img" aria-label="Upload">📤</span>
-                    <p>Subir archivo CSV</p>
-                </label>
-                <input type="file" id="file-input" accept=".xlsx, .xls, .csv" style="display: none;"
-                    onchange="handleFileSelect(event)">
+            <div class="csv-option" onclick="showUploadPopup()">
+                <span role="img" aria-label="Upload">📤</span>
+                <p>Subir archivo CSV</p>
             </div>
         </div>
     </div>
@@ -93,6 +89,30 @@
         <button onclick="restart()">Salir</button> <!-- Actualizar texto del botón -->
     </div>
 
+    <div id="upload-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close" onclick="closeUploadPopup()">&times;</span>
+            <h2>Subir archivo CSV</h2>
+            <label for="language-select">Seleccionar idioma:</label>
+            <select id="language-select">
+                <option value="en-US">English (United States)</option>
+                <option value="en-GB">English (United Kingdom)</option>
+                <option value="es-ES">Español (España)</option>
+                <option value="fr-FR">Français (France)</option>
+                <option value="de-DE">Deutsch (Deutschland)</option>
+                <option value="it-IT">Italiano (Italia)</option>
+                <option value="pt-PT">Português (Portugal)</option>
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="ru-RU">Русский (Россия)</option>
+                <option value="zh-CN">中文 (中国)</option>
+                <option value="ja-JP">日本語 (日本)</option>
+                <option value="ko-KR">한국어 (대한민국)</option>
+            </select>
+            <label for="file-input-popup">Seleccionar archivo CSV:</label>
+            <input type="file" id="file-input-popup">
+            <button onclick="handleFileSelectFromPopup()">Subir</button>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
     <script src="js/recognition.js"></script>
