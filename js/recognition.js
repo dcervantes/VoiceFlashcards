@@ -12,12 +12,12 @@ errorSound.onerror = function () {
 };
 
 function playActivationSound() {
-    const audio = new Audio('sounds/activation-sound.mp3'); // Asegúrate de tener el archivo de sonido en la ruta correcta
+    const audio = new Audio('sounds/activation-sound.mp3');
     audio.play();
 }
 
 if (!('webkitSpeechRecognition' in window)) {
-    alert("Esta aplicación sólo funciona en Google Chrome.");
+    alert("This app only works on Google Chrome.");
 } else {
     recognition = new webkitSpeechRecognition();
     recognition.continuous = false;
@@ -35,14 +35,14 @@ if (!('webkitSpeechRecognition' in window)) {
     recognition.onend = function () {
         recognizing = false;
         document.getElementById('start-rec-btn').classList.remove('recording');
-        // Restart recognition if there are more phrases to process
+
         if (currentIndex < phrases.length - 1) {
-            setTimeout(() => playPhrase(), 500); // Delay to avoid capturing TTS
+            setTimeout(() => playPhrase(), 500);
         }
         else {
-            if (correctCount == phrases.length -1) {
+            if (correctCount == phrases.length - 1) {
                 end = true;
-                setTimeout(() => playPhrase(), 500); // Delay to avoid capturing TTS
+                setTimeout(() => playPhrase(), 500);
             }
         }
     };
@@ -80,7 +80,7 @@ function normalizeString(str) {
         .replace(/ú/g, 'u')
         .replace(/[^\w\s]|_/g, '')
         .replace(/\s+/g, ' ')
-        .replace(/-/g, ' '); // Añadir esta línea para reemplazar el carácter '-'
+        .replace(/-/g, ' ');
 }
 
 function checkPhrase(transcript) {

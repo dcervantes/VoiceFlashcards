@@ -3,8 +3,8 @@ let currentIndex = 0;
 let correctCount = 0;
 let errorCount = 0;
 let startTime;
-let currentLanguage = 'en-US'; // Idioma por defecto
-let allPhrases = []; // Para almacenar todas las frases del CSV
+let currentLanguage = 'en-US';
+let allPhrases = [];
 let end = false;
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -53,7 +53,7 @@ function handleFileSelect(event) {
         goToStep1_5();
     };
 
-    currentLanguage = 'en-US'; // Establece el idioma por defecto para archivos locales
+    currentLanguage = 'en-US';
     reader.readAsArrayBuffer(file);
 }
 
@@ -76,11 +76,11 @@ function goToStep1() {
     const currentStep = document.querySelector('.step.active');
     if (currentStep) {
         currentStep.classList.remove('active');
-        setTimeout(() => currentStep.style.display = 'none', 500); // Esperar la transición antes de ocultar
+        setTimeout(() => currentStep.style.display = 'none', 500);
     }
     const previousStep = document.getElementById('step-1');
     previousStep.style.display = 'flex';
-    setTimeout(() => previousStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    setTimeout(() => previousStep.classList.add('active'), 50);
 }
 
 function processWorkbook(workbook) {
@@ -97,11 +97,11 @@ function goToStep1_5() {
     const currentStep = document.querySelector('.step.active');
     if (currentStep) {
         currentStep.classList.remove('active');
-        setTimeout(() => currentStep.style.display = 'none', 500); // Esperar la transición antes de ocultar
+        setTimeout(() => currentStep.style.display = 'none', 500);
     }
     const nextStep = document.getElementById('step-1.5');
     nextStep.style.display = 'flex';
-    setTimeout(() => nextStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    setTimeout(() => nextStep.classList.add('active'), 50);
     // Añadir esta línea
     const initialSliderValue = document.getElementById('level-slider').value;
     updateLevels(initialSliderValue);
@@ -110,7 +110,7 @@ function goToStep1_5() {
 function updateLevels(value) {
     const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     const levelLabels = document.getElementById('level-labels');
-    levelLabels.innerHTML = ''; // Limpiar niveles anteriores
+    levelLabels.innerHTML = '';
 
     for (let i = 0; i < value; i++) {
         const levelElement = document.createElement('span');
@@ -126,20 +126,19 @@ function goToStep2() {
     const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     const selectedLevels = levels.slice(0, levelSliderValue);
 
-    // Filtra y selecciona frases aleatorias según la configuración
     const filteredPhrases = allPhrases.filter(item => selectedLevels.includes(item.level));
     phrases = shuffleArray(filteredPhrases).slice(0, numFlashcards);
 
     const currentStep = document.querySelector('.step.active');
     if (currentStep) {
         currentStep.classList.remove('active');
-        setTimeout(() => currentStep.style.display = 'none', 500); // Esperar la transición antes de ocultar
+        setTimeout(() => currentStep.style.display = 'none', 500);
     }
     const nextStep = document.getElementById('step-2');
     nextStep.style.display = 'flex';
-    setTimeout(() => nextStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    setTimeout(() => nextStep.classList.add('active'), 50);
 
-    document.getElementById('progress-bar').style.display = 'block'; // Mostrar la barra de progreso
+    document.getElementById('progress-bar').style.display = 'block';
 
     currentIndex = 0;
     correctCount = 0;
@@ -147,7 +146,7 @@ function goToStep2() {
     end = false;
     updateStats();
     resetCountdown();
-    startCountdown(); // Iniciar la cuenta regresiva
+    startCountdown();
 }
 
 function startCountdown() {
@@ -163,7 +162,7 @@ function startCountdown() {
         } else {
             clearInterval(countdownInterval);
             countdownElement.style.display = 'none';
-            showPhrase(); // Mostrar la primera frase
+            showPhrase();
             playPhrase();
         }
     }, 1000);
@@ -172,7 +171,7 @@ function startCountdown() {
 function resetCountdown() {
     const countdownElement = document.getElementById('countdown');
     countdownElement.style.display = 'none';
-    countdownElement.textContent = '3'; // Restablecer el valor inicial de la cuenta regresiva
+    countdownElement.textContent = '3';
 }
 
 function playPhrase() {
@@ -182,7 +181,7 @@ function playPhrase() {
 
     utterance.onend = function () {
         playActivationSound();
-        setTimeout(toggleRecognition, 1000); // Activar el reconocimiento de voz después del sonido
+        setTimeout(toggleRecognition, 1000);
     };
 
     window.speechSynthesis.speak(utterance);
@@ -194,10 +193,10 @@ function showPhrase() {
     const currentPhrase = phrases[currentIndex];
 
     flashcard.textContent = currentPhrase.phrase;
-    flashcard.className = ''; // Clear previous class
+    flashcard.className = '';
 
     if (currentPhrase.level) {
-        flashcardLevel.textContent = currentPhrase.level; // Mostrar el nivel de la frase
+        flashcardLevel.textContent = currentPhrase.level;
         flashcardLevel.style.display = 'block';
         flashcard.style.display = 'block';
     } else {
@@ -221,11 +220,11 @@ function nextStep() {
     const currentStep = document.querySelector('.step.active');
     if (currentStep) {
         currentStep.classList.remove('active');
-        setTimeout(() => currentStep.style.display = 'none', 500); // Esperar la transición antes de ocultar
+        setTimeout(() => currentStep.style.display = 'none', 500);
     }
     const nextStep = document.getElementById('step-2');
     nextStep.style.display = 'flex';
-    setTimeout(() => nextStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    setTimeout(() => nextStep.classList.add('active'), 50);
 }
 
 function showPrev() {
@@ -252,7 +251,7 @@ function showResults() {
     const currentStep = document.querySelector('.step.active');
     if (currentStep) {
         currentStep.classList.remove('active');
-        setTimeout(() => currentStep.style.display = 'none', 500); // Esperar la transición antes de ocultar
+        setTimeout(() => currentStep.style.display = 'none', 500);
     }
     document.getElementById('final-correct-count').textContent = correctCount;
     document.getElementById('final-error-count').textContent = errorCount;
@@ -262,14 +261,14 @@ function showResults() {
     document.getElementById('final-time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     const resultsStep = document.getElementById('step-3');
     resultsStep.style.display = 'flex';
-    setTimeout(() => resultsStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    setTimeout(() => resultsStep.classList.add('active'), 50);
 }
 
 function retry() {
     const currentStep = document.querySelector('.step.active');
     if (currentStep) {
         currentStep.classList.remove('active');
-        setTimeout(() => currentStep.style.display = 'none', 500); // Esperar la transición antes de ocultar
+        setTimeout(() => currentStep.style.display = 'none', 500);
     }
     currentIndex = 0;
     correctCount = 0;
@@ -279,7 +278,7 @@ function retry() {
     showPhrase();
     const retryStep = document.getElementById('step-2');
     retryStep.style.display = 'flex';
-    setTimeout(() => retryStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    setTimeout(() => retryStep.classList.add('active'), 50);
     playPhrase();
 }
 
@@ -289,18 +288,17 @@ function regeneratePhrases() {
     const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     const selectedLevels = levels.slice(0, levelSliderValue);
 
-    // Filtra y selecciona frases aleatorias según la configuración
     const filteredPhrases = allPhrases.filter(item => selectedLevels.includes(item.level));
     phrases = shuffleArray(filteredPhrases).slice(0, numFlashcards);
 
-    retry(); // Llamar a la función retry para reiniciar el paso 2 con las nuevas frases
+    retry();
 }
 
 function restart() {
     const currentStep = document.querySelector('.step.active');
     if (currentStep) {
         currentStep.classList.remove('active');
-        setTimeout(() => currentStep.style.display = 'none', 500); // Esperar la transición antes de ocultar
+        setTimeout(() => currentStep.style.display = 'none', 500);
     }
     currentIndex = 0;
     correctCount = 0;
@@ -310,7 +308,7 @@ function restart() {
     document.getElementById('file-input-popup').value = '';
     const startStep = document.getElementById('step-1');
     startStep.style.display = 'flex';
-    setTimeout(() => startStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    setTimeout(() => startStep.classList.add('active'), 50);
 }
 
 
