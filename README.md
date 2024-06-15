@@ -12,19 +12,9 @@ VoiceFlashcards is a web application designed to help users practice language ph
 - Track correct and incorrect responses.
 - Options to retry with the same phrases or regenerate new phrases based on the chosen configuration.
 
-## Installation
+## Demo Page
 
-To run the project locally, follow these steps:
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/voiceflashcards.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd voiceflashcards
-   ```
-3. Open \`index.html\` in your preferred web browser.
+[Go to Demo Page](https://dcervantes.github.io/VoiceFlashcards/)
 
 ## Usage
 
