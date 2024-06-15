@@ -10,7 +10,6 @@ VoiceFlashcards is a web application designed to help users practice language ph
 - Practice speaking phrases with real-time feedback using speech recognition.
 - Display the phrase level on each flashcard.
 - Track correct and incorrect responses.
-- Timer to track the time spent practicing.
 - Options to retry with the same phrases or regenerate new phrases based on the chosen configuration.
 
 ## Installation
@@ -92,12 +91,3 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Thanks to the open-source community for the tools and libraries used in this project.
-- Special thanks to all contributors for their efforts and improvements.
-
-## Contact
-
-For questions or feedback, please contact [yourname](mailto:youremail@example.com).
