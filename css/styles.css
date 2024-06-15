@@ -31,7 +31,6 @@ h1 {
 #countdown {
     font-size: 48px;
     text-align: center;
-    margin-top: 20px;
 }
 
 #flashcard-container {
@@ -57,16 +56,12 @@ h1 {
 
 #flashcard {
     font-size: 2em;
-    text-align: center;
     margin: 20px;
-    border: 2px solid #444;
-    padding: 20px;
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #1f1f1f;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s, border-color 0.3s;
 }
 .flashcard.correct {
@@ -163,8 +158,6 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    margin: 20px;
     background-color: #1f1f1f;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -175,7 +168,7 @@ input {
     transform: translate(-50%, -50%) translateY(20px); /* Desplazar hacia abajo inicialmente */
     transition: opacity 0.5s ease, transform 0.5s ease; /* Transiciones suaves */
     position: absolute; /* Posicionar absolutamente para evitar scrollbars */
-    top: 50%;
+    top: 100%;
     left: 50%;
 }
 
@@ -185,21 +178,26 @@ input {
     transform: translate(-50%, -50%) translateY(0); /* Sin desplazamiento */
 }
 
-@media (min-width: 768px) {
+@media (min-width: 359px) {
     .step {
         width: 80%;
+        padding: 20px;
+        margin: 20px;
+        top: 50%;
     }
 }
 
 @media (min-width: 1024px) {
     .step {
         width: 70%;
+
     }
 }
 
 @media (min-width: 1440px) {
     .step {
         width: 60%;
+
     }
 }
 
@@ -214,7 +212,7 @@ input {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 0px;
     margin: 10px;
     background-color: #1f1f1f;
     border-radius: 10px;
@@ -223,6 +221,12 @@ input {
     height: 150px;
     cursor: pointer;
     transition: transform 0.3s, background-color 0.3s;
+}
+
+@media (min-width: 768px) {
+    .csv-option {
+        padding: 20px;
+    }
 }
 
 .csv-option:hover {

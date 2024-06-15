@@ -3,13 +3,18 @@ let recognition;
 const correctSound = new Audio('sounds/correct.mp3');
 const errorSound = new Audio('sounds/error.mp3');
 
-correctSound.onerror = function() {
+correctSound.onerror = function () {
     console.error('Error loading correct sound');
 };
 
-errorSound.onerror = function() {
+errorSound.onerror = function () {
     console.error('Error loading error sound');
 };
+
+function playActivationSound() {
+    const audio = new Audio('sounds/activation-sound.mp3'); // Asegúrate de tener el archivo de sonido en la ruta correcta
+    audio.play();
+}
 
 if (!('webkitSpeechRecognition' in window)) {
     alert("Esta aplicación sólo funciona en Google Chrome.");
@@ -18,25 +23,31 @@ if (!('webkitSpeechRecognition' in window)) {
     recognition.continuous = false;
     recognition.interimResults = true;
 
-    recognition.onstart = function() {
+    recognition.onstart = function () {
         recognizing = true;
         document.getElementById('start-rec-btn').classList.add('recording');
     };
 
-    recognition.onerror = function(event) {
+    recognition.onerror = function (event) {
         console.error(event.error);
     };
 
-    recognition.onend = function() {
+    recognition.onend = function () {
         recognizing = false;
         document.getElementById('start-rec-btn').classList.remove('recording');
         // Restart recognition if there are more phrases to process
         if (currentIndex < phrases.length - 1) {
-            setTimeout(() => recognition.start(), 1000); // Delay to avoid capturing TTS
+            setTimeout(() => playPhrase(), 500); // Delay to avoid capturing TTS
+        }
+        else {
+            if (correctCount == phrases.length -1) {
+                end = true;
+                setTimeout(() => playPhrase(), 500); // Delay to avoid capturing TTS
+            }
         }
     };
 
-    recognition.onresult = function(event) {
+    recognition.onresult = function (event) {
         let interimTranscript = '';
         for (let i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
@@ -51,7 +62,7 @@ if (!('webkitSpeechRecognition' in window)) {
 
 function toggleRecognition() {
     if (!recognition) return;
-    
+
     if (recognizing) {
         recognition.stop();
         return;
@@ -62,14 +73,14 @@ function toggleRecognition() {
 
 function normalizeString(str) {
     return str.toLowerCase()
-              .replace(/á/g, 'a')
-              .replace(/é/g, 'e')
-              .replace(/í/g, 'i')
-              .replace(/ó/g, 'o')
-              .replace(/ú/g, 'u')
-              .replace(/[^\w\s]|_/g, '')
-              .replace(/\s+/g, ' ')
-              .replace(/-/g, ' '); // Añadir esta línea para reemplazar el carácter '-'
+        .replace(/á/g, 'a')
+        .replace(/é/g, 'e')
+        .replace(/í/g, 'i')
+        .replace(/ó/g, 'o')
+        .replace(/ú/g, 'u')
+        .replace(/[^\w\s]|_/g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/-/g, ' '); // Añadir esta línea para reemplazar el carácter '-'
 }
 
 function checkPhrase(transcript) {
@@ -92,18 +103,7 @@ function checkPhrase(transcript) {
         errorCount++;
         setTimeout(() => {
             document.getElementById('flashcard').classList.remove('incorrect');
-        }, 1000);
+        }, 100);
     }
     updateStats();
-}
-
-function playPhrase() {
-    recognition.stop();
-    const flashcard = document.getElementById('flashcard').textContent;
-    const utterance = new SpeechSynthesisUtterance(flashcard);
-    utterance.lang = currentLanguage;
-    utterance.onend = function() {
-        setTimeout(() => recognition.start(), 1000); // Delay to avoid capturing TTS
-    };
-    speechSynthesis.speak(utterance);
 }

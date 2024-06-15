@@ -5,8 +5,9 @@ let errorCount = 0;
 let startTime;
 let currentLanguage = 'en-US'; // Idioma por defecto
 let allPhrases = []; // Para almacenar todas las frases del CSV
+let end = false;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('step-1').style.display = 'flex';
 });
 
@@ -26,10 +27,10 @@ function handleFileSelectFromPopup() {
     if (selectedFile) {
         const reader = new FileReader();
 
-        reader.onload = function(event) {
+        reader.onload = function (event) {
             const decoder = new TextDecoder('utf-8');
             const text = decoder.decode(event.target.result);
-            const workbook = XLSX.read(text, {type: 'string'});
+            const workbook = XLSX.read(text, { type: 'string' });
             processWorkbook(workbook);
             currentLanguage = selectedLanguage;
             goToStep1_5();
@@ -44,10 +45,10 @@ function handleFileSelect(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = function(event) {
+    reader.onload = function (event) {
         const decoder = new TextDecoder('utf-8');
         const text = decoder.decode(event.target.result);
-        const workbook = XLSX.read(text, {type: 'string'});
+        const workbook = XLSX.read(text, { type: 'string' });
         processWorkbook(workbook);
         goToStep1_5();
     };
@@ -62,7 +63,7 @@ function handlePresetFileSelect(filePath, language) {
         .then(data => {
             const decoder = new TextDecoder('utf-8');
             const text = decoder.decode(data);
-            const workbook = XLSX.read(text, {type: 'string'});
+            const workbook = XLSX.read(text, { type: 'string' });
             processWorkbook(workbook);
             goToStep1_5();
         })
@@ -85,9 +86,9 @@ function goToStep1() {
 function processWorkbook(workbook) {
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
-    
-    const jsonSheet = XLSX.utils.sheet_to_json(worksheet, {header: 1});
-    
+
+    const jsonSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
     // Ignora la primera fila
     allPhrases = jsonSheet.slice(1).map(row => ({ level: row[0], phrase: row[1] })).filter(item => item.phrase);
 }
@@ -110,7 +111,7 @@ function updateLevels(value) {
     const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     const levelLabels = document.getElementById('level-labels');
     levelLabels.innerHTML = ''; // Limpiar niveles anteriores
-    
+
     for (let i = 0; i < value; i++) {
         const levelElement = document.createElement('span');
         levelElement.textContent = levels[i];
@@ -124,7 +125,7 @@ function goToStep2() {
     const levelSliderValue = parseInt(document.getElementById('level-slider').value);
     const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     const selectedLevels = levels.slice(0, levelSliderValue);
-    
+
     // Filtra y selecciona frases aleatorias según la configuración
     const filteredPhrases = allPhrases.filter(item => selectedLevels.includes(item.level));
     phrases = shuffleArray(filteredPhrases).slice(0, numFlashcards);
@@ -143,7 +144,9 @@ function goToStep2() {
     currentIndex = 0;
     correctCount = 0;
     errorCount = 0;
+    end = false;
     updateStats();
+    resetCountdown();
     startCountdown(); // Iniciar la cuenta regresiva
 }
 
@@ -161,8 +164,28 @@ function startCountdown() {
             clearInterval(countdownInterval);
             countdownElement.style.display = 'none';
             showPhrase(); // Mostrar la primera frase
+            playPhrase();
         }
     }, 1000);
+}
+
+function resetCountdown() {
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.style.display = 'none';
+    countdownElement.textContent = '3'; // Restablecer el valor inicial de la cuenta regresiva
+}
+
+function playPhrase() {
+    const currentPhrase = phrases[currentIndex].phrase;
+    const utterance = new SpeechSynthesisUtterance(currentPhrase);
+    utterance.lang = currentLanguage;
+
+    utterance.onend = function () {
+        playActivationSound();
+        setTimeout(toggleRecognition, 1000); // Activar el reconocimiento de voz después del sonido
+    };
+
+    window.speechSynthesis.speak(utterance);
 }
 
 function showPhrase() {
@@ -176,31 +199,15 @@ function showPhrase() {
     if (currentPhrase.level) {
         flashcardLevel.textContent = currentPhrase.level; // Mostrar el nivel de la frase
         flashcardLevel.style.display = 'block';
+        flashcard.style.display = 'block';
     } else {
         flashcardLevel.textContent = '';
         flashcardLevel.style.display = 'none';
+        flashcard.style.display = 'none';
     }
-
     updateProgress();
     document.getElementById('recognized-text').textContent = '';
 }
-
-function playPhrase() {
-    const currentPhrase = phrases[currentIndex].phrase;
-    const utterance = new SpeechSynthesisUtterance(currentPhrase);
-    utterance.lang = currentLanguage;
-    window.speechSynthesis.speak(utterance);
-}
-
-function toggleRecognition() {
-    if (recognizing) {
-        recognition.stop();
-        return;
-    }
-    recognition.lang = currentLanguage;
-    recognition.start();
-}
-
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -267,11 +274,13 @@ function retry() {
     currentIndex = 0;
     correctCount = 0;
     errorCount = 0;
+    end = false;
     updateStats();
     showPhrase();
     const retryStep = document.getElementById('step-2');
     retryStep.style.display = 'flex';
     setTimeout(() => retryStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición
+    playPhrase();
 }
 
 function regeneratePhrases() {
@@ -279,7 +288,7 @@ function regeneratePhrases() {
     const levelSliderValue = parseInt(document.getElementById('level-slider').value);
     const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     const selectedLevels = levels.slice(0, levelSliderValue);
-    
+
     // Filtra y selecciona frases aleatorias según la configuración
     const filteredPhrases = allPhrases.filter(item => selectedLevels.includes(item.level));
     phrases = shuffleArray(filteredPhrases).slice(0, numFlashcards);
@@ -296,8 +305,9 @@ function restart() {
     currentIndex = 0;
     correctCount = 0;
     errorCount = 0;
+    end = false;
     phrases = [];
-    document.getElementById('file-input').value = '';
+    document.getElementById('file-input-popup').value = '';
     const startStep = document.getElementById('step-1');
     startStep.style.display = 'flex';
     setTimeout(() => startStep.classList.add('active'), 50); // Añadir un pequeño retraso para asegurar la transición

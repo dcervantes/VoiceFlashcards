@@ -14,27 +14,27 @@
         <div class="csv-options-container">
             <div class="csv-option" onclick="handlePresetFileSelect('data/english_phrases.csv', 'en-US')">
                 <span role="img" aria-label="English">🇬🇧</span>
-                <p>English Phrases</p>
+                <p>English</p>
             </div>
             <div class="csv-option" onclick="handlePresetFileSelect('data/spanish_phrases.csv', 'es-ES')">
                 <span role="img" aria-label="Spanish">🇪🇸</span>
-                <p>Spanish Phrases</p>
+                <p>Spanish</p>
             </div>
             <div class="csv-option" onclick="handlePresetFileSelect('data/german_phrases.csv', 'de-DE')">
                 <span role="img" aria-label="German">🇩🇪</span>
-                <p>German Phrases</p>
+                <p>German</p>
             </div>
             <div class="csv-option" onclick="handlePresetFileSelect('data/italian_phrases.csv', 'it-IT')">
                 <span role="img" aria-label="Italian">🇮🇹</span>
-                <p>Italian Phrases</p>
+                <p>Italian</p>
             </div>
             <div class="csv-option" onclick="handlePresetFileSelect('data/french_phrases.csv', 'fr-FR')">
                 <span role="img" aria-label="French">🇫🇷</span>
-                <p>French Phrases</p>
+                <p>French</p>
             </div>
             <div class="csv-option" onclick="showUploadPopup()">
                 <span role="img" aria-label="Upload">📤</span>
-                <p>Subir archivo CSV</p>
+                <p>Upload CSV</p>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
     <div id="step-1.5" class="step" style="display: none;">
         <h1>Configuración de Flashcards</h1>
         <label for="num-flashcards">Número de Flashcards:</label>
-        <input type="number" id="num-flashcards" min="1" value="10" class="centered-input">
+        <input type="number" id="num-flashcards" min="2" value="10" class="centered-input">
 
         <h2>Niveles a Incluir:</h2>
         <div class="slider-container">
@@ -63,10 +63,9 @@
         </div>
 
         <div id="flashcard-container">
-            <div id="flashcard-level"></div> <!-- Contenedor para el nivel -->
-            <div id="flashcard">
-                <div id="countdown" style="display: none;">3</div>
-            </div>
+            <div id="countdown" style="display: none;">3</div>
+            <div id="flashcard-level" style="display: none;"></div> <!-- Contenedor para el nivel -->
+            <div id="flashcard" style="display: none;"></div>
         </div>
         <div id="recognized-text"></div>
         <div class="input-section">
@@ -116,7 +115,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
     <script src="js/recognition.js"></script>
-    <script src="js/ui.js"></script>
     <script src="js/main.js"></script>
 </body>
 
