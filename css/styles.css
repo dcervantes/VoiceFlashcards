@@ -57,7 +57,6 @@ h1 {
 #flashcard {
     font-size: 2em;
     margin: 20px;
-    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -112,9 +111,8 @@ input {
 }
 
 #start-rec-btn.recording {
-    background-color: red; /* Cambia esto al color que prefieras */
-    color: white;
-    border: 2px solid white; /* Añade un borde para mayor visibilidad */
+    background-color: rgba(255, 0, 0, 0.514);
+    transition: background-color 0.3s;
 }
 
 #recognized-text {
@@ -154,7 +152,7 @@ input {
 }
 
 .step {
-    display: none; /* Ocultar todos los pasos por defecto */
+    display: none; 
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -164,25 +162,25 @@ input {
     width: 90%;
     max-width: 800px;
     height: auto;
-    opacity: 0; /* Inicialmente transparente */
-    transform: translate(-50%, -50%) translateY(20px); /* Desplazar hacia abajo inicialmente */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Transiciones suaves */
-    position: absolute; /* Posicionar absolutamente para evitar scrollbars */
-    top: 100%;
+    padding: 20px;
+    opacity: 0; 
+    transform: translate(-50%, -50%) translateY(20px); 
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    position: absolute;
+    top: 50%;
     left: 50%;
 }
 
 .step.active {
-    display: flex; /* Mostrar el paso activo */
-    opacity: 1; /* Opacidad completa */
-    transform: translate(-50%, -50%) translateY(0); /* Sin desplazamiento */
+    display: flex;
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
 }
 
-@media (min-width: 359px) {
+@media (max-width: 359px) {
     .step {
         width: 80%;
         padding: 20px;
-        margin: 20px;
         top: 50%;
     }
 }
@@ -217,8 +215,9 @@ input {
     background-color: #1f1f1f;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    width: 150px;
-    height: 150px;
+    width: 7em;
+    height: 7em;
+
     cursor: pointer;
     transition: transform 0.3s, background-color 0.3s;
 }
@@ -226,6 +225,8 @@ input {
 @media (min-width: 768px) {
     .csv-option {
         padding: 20px;
+        width: 150px;
+        height: 150px;
     }
 }
 
@@ -256,15 +257,15 @@ input {
 .slider-container {
     position: relative;
     width: 100%;
-    padding: 0 20px; /* Añadir margen interno para que el slider no sobresalga */
-    box-sizing: border-box; /* Incluir padding en el cálculo del ancho total */
-    text-align: center; /* Asegurar que el contenido esté centrado */
+    padding: 0 20px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 #level-slider {
     width: 100%;
     margin: 20px 0;
-    box-sizing: border-box; /* Incluir padding en el cálculo del ancho total */
+    box-sizing: border-box;
 }
 
 #level-labels {
@@ -273,17 +274,17 @@ input {
     top: 0;
     transform: translateX(-50%);
     left: 50%;
-    white-space: nowrap; /* Evitar que los niveles se dividan en varias líneas */
+    white-space: nowrap;
 }
 
 #level-labels span {
-    margin: 0 10px; /* Espacio entre los niveles */
+    margin: 0 10px;
 }
 
 .centered-input {
-    width: 100px; /* Ajustar ancho del input */
-    text-align: center; /* Centrar texto del input */
-    margin: 0 auto; /* Centrar el input en el contenedor */
+    width: 100px;
+    text-align: center;
+    margin: 0 auto;
     display: block;
 }
 
@@ -308,8 +309,8 @@ input {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    width: 80%; /* Cambiar a un porcentaje más grande para pantallas pequeñas */
-    max-width: 400px; /* Ancho máximo para pantallas más grandes */
+    width: 80%;
+    max-width: 400px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
@@ -330,13 +331,13 @@ input {
 
 .popup-content select {
     display: block;
-    width: calc(100% - 20px); /* Reducir el ancho total para agregar margen interno */
+    width: calc(100% - 20px);
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-left: 10px; /* Agregar margen a la izquierda */
-    margin-right: 10px; /* Agregar margen a la derecha */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .popup-content input[type="file"] {
@@ -345,8 +346,8 @@ input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-left: 10px; /* Agregar margen a la izquierda */
-    margin-right: 10px; /* Agregar margen a la derecha */
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .popup-content button {

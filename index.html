@@ -10,7 +10,6 @@
 
 <body>
     <div id="step-1" class="step active" style="display: none;">
-        <h1>Seleccionar Archivo CSV</h1>
         <div class="csv-options-container">
             <div class="csv-option" onclick="handlePresetFileSelect('data/english_phrases.csv', 'en-US')">
                 <span role="img" aria-label="English">🇬🇧</span>
@@ -50,9 +49,10 @@
             </div>
             <input type="range" id="level-slider" min="1" max="6" value="6" oninput="updateLevels(this.value)">
         </div>
-
-        <button onclick="goToStep1()">🏃🚪</button>
-        <button onclick="goToStep2()">▶</button> 
+        <div class="button-section">
+            <button onclick="goToStep1()">🏃🚪</button>
+            <button onclick="goToStep2()">▶</button>
+        </div>
     </div>
 
 
@@ -68,7 +68,7 @@
         </div>
         <div id="recognized-text"></div>
         <div class="input-section">
-            <button id="start-rec-btn" >🎙️</button>
+            <span id="start-rec-btn" >🎙️</span>
         </div>
         <div id="stats">
             ✅ <span id="correct-count">0</span> | ❌ <span id="error-count">0</span>
