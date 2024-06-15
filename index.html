@@ -33,27 +33,26 @@
                 <p>French</p>
             </div>
             <div class="csv-option" onclick="showUploadPopup()">
-                <span role="img" aria-label="Upload">📤</span>
-                <p>Upload CSV</p>
+                <span role="img" aria-label="Upload">⚙️</span>
+                <p>Generate</p>
             </div>
         </div>
     </div>
 
     <div id="step-1.5" class="step" style="display: none;">
-        <h1>Configuración de Flashcards</h1>
-        <label for="num-flashcards">Número de Flashcards:</label>
+        <h1>🛠️</h1>
+        <label for="num-flashcards">Nº:</label>
         <input type="number" id="num-flashcards" min="2" value="10" class="centered-input">
 
         <h2>Niveles a Incluir:</h2>
         <div class="slider-container">
             <div id="level-labels">
-                <!-- Los niveles se mostrarán aquí -->
             </div>
             <input type="range" id="level-slider" min="1" max="6" value="6" oninput="updateLevels(this.value)">
         </div>
 
-        <button onclick="goToStep1()">Volver</button> <!-- Botón "Volver" -->
-        <button onclick="goToStep2()">Comenzar</button> <!-- Botón "Comenzar" -->
+        <button onclick="goToStep1()">🏃🚪</button>
+        <button onclick="goToStep2()">▶</button> 
     </div>
 
 
@@ -64,27 +63,26 @@
 
         <div id="flashcard-container">
             <div id="countdown" style="display: none;">3</div>
-            <div id="flashcard-level" style="display: none;"></div> <!-- Contenedor para el nivel -->
+            <div id="flashcard-level" style="display: none;"></div>
             <div id="flashcard" style="display: none;"></div>
         </div>
         <div id="recognized-text"></div>
         <div class="input-section">
-            <button id="start-rec-btn" onclick="toggleRecognition()">🎤</button>
-            <button id="play-phrase-btn" onclick="playPhrase()">🔊</button>
+            <button id="start-rec-btn" >🎙️</button>
         </div>
         <div id="stats">
-            Correctas: <span id="correct-count">0</span> | Errores: <span id="error-count">0</span>
+            ✅ <span id="correct-count">0</span> | ❌ <span id="error-count">0</span>
         </div>
     </div>
 
 
     <div id="step-3" class="step" style="display: none;">
-        <h1>Resultados</h1>
-        <p>Correctas: <span id="final-correct-count"></span></p>
-        <p>Errores: <span id="final-error-count"></span></p>
-        <button onclick="retry()">Volver a intentar</button>
-        <button onclick="regeneratePhrases()">Nuevo intento</button> <!-- Nuevo botón -->
-        <button onclick="restart()">Salir</button> <!-- Actualizar texto del botón -->
+        <h1>🏁</h1>
+        <p>✅ <span id="final-correct-count"></span></p>
+        <p>❌ <span id="final-error-count"></span></p>
+        <button onclick="retry()">🎲</button>
+        <button onclick="regeneratePhrases()">🔄</button>
+        <button onclick="restart()">🆕</button>
     </div>
 
     <div id="upload-popup" class="popup" style="display: none;">
@@ -106,9 +104,9 @@
                 <option value="ja-JP">日本語 (日本)</option>
                 <option value="ko-KR">한국어 (대한민국)</option>
             </select>
-            <label for="file-input-popup">Seleccionar archivo CSV:</label>
+            <label for="file-input-popup">📝</label>
             <input type="file" id="file-input-popup">
-            <button onclick="handleFileSelectFromPopup()">Subir</button>
+            <button onclick="handleFileSelectFromPopup()">📤</button>
         </div>
     </div>
 
