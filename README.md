@@ -75,7 +75,7 @@ If you have a document with phrases and levels, you can use ChatGPT to generate 
 1. **Upload Document**: Upload your document containing the phrases and levels to ChatGPT.
 2. **Prompt ChatGPT**: Use a prompt like the following:
    ```
-   Based on the uploaded document, generate a CSV file with the phrases and their corresponding levels. The CSV should have two columns: Level and Phrase.
+   Based on the uploaded document, generate a CSV file with the phrases and their corresponding levels (A1, A2, B1, B2, C1, C2). The CSV should have two columns: Level and Phrase.
    ```
 3. **Review and Edit**: Review the generated CSV content and make any necessary edits.
 4. **Download CSV**: Download the generated CSV file from ChatGPT.
