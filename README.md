@@ -82,11 +82,9 @@ If you have a document with phrases and levels, you can use ChatGPT to generate 
 
 ## Screenshots
 
-*Add relevant screenshots of your application here.*
+![imagen](https://github.com/dcervantes/VoiceFlashcards/assets/3668610/1bdceb8c-92fd-4e14-bef7-86aa2b10e17f)
+![imagen](https://github.com/dcervantes/VoiceFlashcards/assets/3668610/ac87e634-0e19-4658-a6a8-f507ebeecb14)
 
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or new features.
 
 ## License
 
