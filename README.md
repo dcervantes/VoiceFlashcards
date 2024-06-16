@@ -1,5 +1,6 @@
 
 # VoiceFlashcards
+![Screencast from 2024-06-16 22-09-49](https://github.com/dcervantes/VoiceFlashcards/assets/3668610/a45346b0-117b-4fe2-be16-8b6e0c7b873b)
 
 VoiceFlashcards is a web application designed to help users practice language phrases using speech recognition. Users can load a CSV file with phrases, configure the number of flashcards and levels, and then practice by speaking the phrases aloud. The application supports multiple languages and allows users to monitor their progress and results.
 
