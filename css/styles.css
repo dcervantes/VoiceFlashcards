@@ -70,6 +70,14 @@ h1 {
 .flashcard.incorrect {
     border: 3px solid red;
 }
+
+.button-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
 .buttons, .input-section {
     display: flex;
     justify-content: center;
@@ -86,10 +94,37 @@ button {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    border-radius: 12px;
 }
+
+.primary {
+    background-color: #0eb42a;
+    width: 100%;
+}
+
+.primary-outline {
+    background-color: #00000000;
+    border: 2px solid #007bff;
+    width: 100%;
+}
+
+.secondary {
+    background-color: #6c757d;
+}
+
 button:hover {
     background-color: #0056b3;
 }
+
+.secondary:hover {
+    background-color:#aaa
+}
+
+.primary:hover {
+    background-color: #0c7f24;
+
+}
+
 input {
     border: 2px solid #444;
     width: 60%;
@@ -110,8 +145,14 @@ input {
     background-color: #218838;
 }
 
-#start-rec-btn.recording {
+#start-rec-btn.recording, #recording-mic1.recording, #recording-mic2.recording {
     background-color: rgba(255, 0, 0, 0.514);
+    transition: background-color 0.3s;
+    fill:#ffffff;
+}
+
+#recording-mic-pad.recording {
+    fill: rgba(255, 0, 0, 0.514);
     transition: background-color 0.3s;
 }
 

@@ -86,10 +86,7 @@ function goToStep1() {
 function processWorkbook(workbook) {
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
-
     const jsonSheet = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-
-    // Ignora la primera fila
     allPhrases = jsonSheet.slice(1).map(row => ({ level: row[0], phrase: row[1] })).filter(item => item.phrase);
 }
 
@@ -255,10 +252,6 @@ function showResults() {
     }
     document.getElementById('final-correct-count').textContent = correctCount;
     document.getElementById('final-error-count').textContent = errorCount;
-    const elapsedTime = Date.now() - startTime;
-    const minutes = Math.floor(elapsedTime / 60000);
-    const seconds = Math.floor((elapsedTime % 60000) / 1000);
-    document.getElementById('final-time').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     const resultsStep = document.getElementById('step-3');
     resultsStep.style.display = 'flex';
     setTimeout(() => resultsStep.classList.add('active'), 50);

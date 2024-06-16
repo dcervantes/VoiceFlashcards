@@ -26,6 +26,9 @@ if (!('webkitSpeechRecognition' in window)) {
     recognition.onstart = function () {
         recognizing = true;
         document.getElementById('start-rec-btn').classList.add('recording');
+        document.getElementById('recording-mic1').classList.add('recording');
+        document.getElementById('recording-mic2').classList.add('recording');
+        document.getElementById('recording-mic-pad').classList.add('recording');
     };
 
     recognition.onerror = function (event) {
@@ -35,6 +38,9 @@ if (!('webkitSpeechRecognition' in window)) {
     recognition.onend = function () {
         recognizing = false;
         document.getElementById('start-rec-btn').classList.remove('recording');
+        document.getElementById('recording-mic1').classList.remove('recording');
+        document.getElementById('recording-mic2').classList.remove('recording');
+        document.getElementById('recording-mic-pad').classList.remove('recording');
 
         if (currentIndex < phrases.length - 1) {
             setTimeout(() => playPhrase(), 500);
