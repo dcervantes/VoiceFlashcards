@@ -1,173 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VoiceFlashcards</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-</head>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+  </head>
 
-<body>
-    <div id="step-1" class="step active" style="display: none;">
-        <div class="csv-options-container">
-            <div class="csv-option" onclick="handlePresetFileSelect('data/english_phrases.csv', 'en-US')">
-                <span role="img" aria-label="English">🇬🇧</span>
-                <p>English</p>
-            </div>
-            <div class="csv-option" onclick="handlePresetFileSelect('data/spanish_phrases.csv', 'es-ES')">
-                <span role="img" aria-label="Spanish">🇪🇸</span>
-                <p>Spanish</p>
-            </div>
-            <div class="csv-option" onclick="handlePresetFileSelect('data/german_phrases.csv', 'de-DE')">
-                <span role="img" aria-label="German">🇩🇪</span>
-                <p>German</p>
-            </div>
-            <div class="csv-option" onclick="handlePresetFileSelect('data/italian_phrases.csv', 'it-IT')">
-                <span role="img" aria-label="Italian">🇮🇹</span>
-                <p>Italian</p>
-            </div>
-            <div class="csv-option" onclick="handlePresetFileSelect('data/french_phrases.csv', 'fr-FR')">
-                <span role="img" aria-label="French">🇫🇷</span>
-                <p>French</p>
-            </div>
-            <div class="csv-option" onclick="showUploadPopup()">
-                <span role="img" aria-label="Upload">⚙️</span>
-                <p>Generate</p>
-            </div>
+  <body>
+    <div id="step-1" class="step active" style="display: none">
+      <div class="csv-options-container">
+        <div
+          class="csv-option"
+          onclick="handlePresetFileSelect('data/english_phrases.csv', 'en-US')"
+        >
+          <span role="img" aria-label="English">🇬🇧</span>
+          <p>English</p>
         </div>
+        <div
+          class="csv-option"
+          onclick="handlePresetFileSelect('data/spanish_phrases.csv', 'es-ES')"
+        >
+          <span role="img" aria-label="Spanish">🇪🇸</span>
+          <p>Spanish</p>
+        </div>
+        <div
+          class="csv-option"
+          onclick="handlePresetFileSelect('data/german_phrases.csv', 'de-DE')"
+        >
+          <span role="img" aria-label="German">🇩🇪</span>
+          <p>German</p>
+        </div>
+        <div
+          class="csv-option"
+          onclick="handlePresetFileSelect('data/italian_phrases.csv', 'it-IT')"
+        >
+          <span role="img" aria-label="Italian">🇮🇹</span>
+          <p>Italian</p>
+        </div>
+        <div
+          class="csv-option"
+          onclick="handlePresetFileSelect('data/french_phrases.csv', 'fr-FR')"
+        >
+          <span role="img" aria-label="French">🇫🇷</span>
+          <p>French</p>
+        </div>
+        <div class="csv-option" onclick="showUploadPopup()">
+          <span role="img" aria-label="Upload">⚙️</span>
+          <p>Generate</p>
+        </div>
+      </div>
     </div>
 
-    <div id="step-1.5" class="step" style="display: none;">
-        <h1>🛠️</h1>
-        <label for="num-flashcards">Nº:</label>
-        <input type="number" id="num-flashcards" min="2" value="10" class="centered-input">
+    <div id="step-1.5" class="step" style="display: none">
+      <h1>🛠️</h1>
+      <label for="num-flashcards">Nº:</label>
+      <input
+        type="number"
+        id="num-flashcards"
+        min="2"
+        value="10"
+        class="centered-input"
+      />
 
-        <h2>Levels:</h2>
-        <div class="slider-container">
-            <div id="level-labels">
-            </div>
-            <input type="range" id="level-slider" min="1" max="6" value="6" oninput="updateLevels(this.value)">
-        </div>
-        <div class="button-section">
-            <button class="secondary" onclick="goToStep1()">
-                <svg width="24px" heigth="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
-                    <g>
-                        <path fill="none" d="M0 0h24v24H0z"></path>
-                        <path d="M8 7v4L2 6l6-5v4h5a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H8z"></path>
-                    </g>
-                </svg>
-            </button>
-            <button class="primary" onclick="goToStep2()">▶</button>
-        </div>
+      <h2>Levels:</h2>
+      <div class="slider-container">
+        <div id="level-labels"></div>
+        <input
+          type="range"
+          id="level-slider"
+          min="1"
+          max="6"
+          value="6"
+          oninput="updateLevels(this.value)"
+        />
+      </div>
+      <div class="button-section">
+        <button class="secondary" onclick="goToStep1()">
+          <svg
+            width="24px"
+            heigth="24px"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#ffffff"
+          >
+            <g>
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path
+                d="M8 7v4L2 6l6-5v4h5a8 8 0 1 1 0 16H4v-2h9a6 6 0 1 0 0-12H8z"
+              ></path>
+            </g>
+          </svg>
+        </button>
+        <button class="primary" onclick="goToStep2()">▶</button>
+      </div>
     </div>
 
+    <div id="step-2" class="step" style="display: none">
+      <div id="progress-bar">
+        <div id="progress"></div>
+      </div>
 
-    <div id="step-2" class="step" style="display: none;">
-        <div id="progress-bar">
-            <div id="progress"></div>
-        </div>
-
-        <div id="flashcard-container">
-            <div id="countdown" style="display: none;">3</div>
-            <div id="flashcard-level" style="display: none;"></div>
-            <div id="flashcard" style="display: none;"></div>
-        </div>
-        <div id="recognized-text"></div>
-        <div class="input-section">
-            <span id="start-rec-btn">
-                <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="64px" height="64px" viewBox="-16 -16 96.00 96.00"
-                    enable-background="new 0 0 32 32" xml:space="preserve" fill="#ffffff">
-                    <g stroke-width="0" transform="translate(0,0), scale(1)">
-                        <rect id="recording-mic-pad" x="-16" y="-16" width="96.00" height="96.00" rx="48" fill="#c0bfbc"
-                            strokewidth="0">
-                        </rect>
-                    </g>
-                    <g id="SVGRepo_iconCarrier" fill="#ffffff">
-                        <g>
-                            <path id="recording-mic1" fill="#231F20"
-                                d="M32,44c6.629,0,12-5.371,12-12V12c0-6.629-5.371-12-12-12S20,5.371,20,12v20C20,38.629,25.371,44,32,44z">
-                            </path>
-                            <path id="recording-mic2" fill="#231F20"
-                                d="M52,28c-2.211,0-4,1.789-4,4c0,8.836-7.164,16-16,16s-16-7.164-16-16c0-2.211-1.789-4-4-4s-4,1.789-4,4 c0,11.887,8.656,21.73,20,23.641V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-4.359C47.344,53.73,56,43.887,56,32 C56,29.789,54.211,28,52,28z">
-                            </path>
-                        </g>
-                    </g>
-                </svg>
-            </span>
-        </div>
-        <div id="stats">
-            ✅ <span id="correct-count">0</span> | ❌ <span id="error-count">0</span>
-        </div>
+      <div id="flashcard-container">
+        <div id="countdown" style="display: none">3</div>
+        <div id="flashcard-level" style="display: none"></div>
+        <div id="flashcard" style="display: none"></div>
+      </div>
+      <div id="recognized-text"></div>
+      <div class="input-section">
+        <span id="start-rec-btn">
+          <svg
+            version="1.0"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            width="64px"
+            height="64px"
+            viewBox="-16 -16 96.00 96.00"
+            enable-background="new 0 0 32 32"
+            xml:space="preserve"
+            fill="#ffffff"
+          >
+            <g stroke-width="0" transform="translate(0,0), scale(1)">
+              <rect
+                id="recording-mic-pad"
+                x="-16"
+                y="-16"
+                width="96.00"
+                height="96.00"
+                rx="48"
+                fill="#c0bfbc"
+                strokewidth="0"
+              ></rect>
+            </g>
+            <g id="SVGRepo_iconCarrier" fill="#ffffff">
+              <g>
+                <path
+                  id="recording-mic1"
+                  fill="#231F20"
+                  d="M32,44c6.629,0,12-5.371,12-12V12c0-6.629-5.371-12-12-12S20,5.371,20,12v20C20,38.629,25.371,44,32,44z"
+                ></path>
+                <path
+                  id="recording-mic2"
+                  fill="#231F20"
+                  d="M52,28c-2.211,0-4,1.789-4,4c0,8.836-7.164,16-16,16s-16-7.164-16-16c0-2.211-1.789-4-4-4s-4,1.789-4,4 c0,11.887,8.656,21.73,20,23.641V60c0,2.211,1.789,4,4,4s4-1.789,4-4v-4.359C47.344,53.73,56,43.887,56,32 C56,29.789,54.211,28,52,28z"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </span>
+      </div>
+      <div id="stats">
+        ✅ <span id="correct-count">0</span> | ❌
+        <span id="error-count">0</span>
+      </div>
     </div>
 
-
-    <div id="step-3" class="step" style="display: none;">
-        <h1>🏁</h1>
-        <p>✅ <span id="final-correct-count"></span></p>
-        <p>❌ <span id="final-error-count"></span></p>
-        <div class="button-section">
-            <button class="primary-outline" onclick="retry()">
-                <svg  width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M14 7H15.9992C19.3129 7 21.9992 9.68629 21.9992 13C21.9992 16.3137 19.3129 19 15.9992 19H8C4.68629 19 2 16.3137 2 13C2 9.68629 4.68629 7 8 7H10M7 4L10 7M10 7L7 10"
-                            stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </g>
-                </svg>
-            </button>
-            <button class="primary-outline" onclick="regeneratePhrases()">
-                <svg fill="#ffffff" width="32px" height="32px" viewBox="0 0 14.00 14.00" role="img" focusable="false"
-                    stroke="#ffffff" stroke-width="0.00014">
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#0a0000"
-                        stroke-width="0.6719999999999999">
-                        <path
-                            d="M 5.459789,4.64957 Q 5.058009,5.26564 4.542379,6.4777 4.395059,6.17636 4.294609,5.9922 4.194169,5.80805 4.023409,5.56698 3.852649,5.32591 3.681889,5.18863 3.511129,5.05136 3.260009,4.95426 3.008899,4.85716 2.714259,4.85716 H 1.214255 q -0.09375,0 -0.154018,-0.0603 Q 0.999969,4.73666 0.999969,4.64287 V 3.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 1.6741,0 2.74553,1.5067 z m 7.54018,5.35045 q 0,0.0937 -0.0603,0.15402 l -2.14285,2.14285 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 v -1.28571 q -0.21428,0 -0.5692,0.003 -0.35491,0.003 -0.54241,0.007 -0.1875,0.003 -0.48884,-0.007 -0.30133,-0.0101 -0.47544,-0.0335 -0.17411,-0.0234 -0.42857,-0.0703 -0.25447,-0.0469 -0.42188,-0.12388 -0.16741,-0.077 -0.38839,-0.19085 -0.22098,-0.11384 -0.39509,-0.26786 -0.17411,-0.15401 -0.3683,-0.35825 -0.1942,-0.20425 -0.375,-0.46541 0.39509,-0.62276 0.91071,-1.82812 0.14732,0.30134 0.24777,0.48549 0.10044,0.18415 0.2712,0.42522 0.17076,0.24107 0.34152,0.37835 0.17076,0.13728 0.42188,0.23438 0.25111,0.0971 0.54576,0.0971 h 1.71428 V 7.85687 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z m 0,-6 q 0,0.0937 -0.0603,0.15401 l -2.14285,2.14286 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 V 4.85721 h -1.71428 q -0.32143,0 -0.58259,0.10045 -0.26116,0.10044 -0.46206,0.30134 -0.20089,0.20089 -0.34152,0.41183 -0.14062,0.21093 -0.30133,0.51897 -0.21429,0.41518 -0.52233,1.14509 -0.19419,0.44196 -0.33147,0.7433 -0.13728,0.30134 -0.36161,0.70313 -0.22433,0.40178 -0.42857,0.66964 -0.20424,0.26786 -0.49553,0.5558 -0.2913,0.28795 -0.60268,0.45871 -0.31139,0.17076 -0.71317,0.28125 -0.40179,0.11049 -0.85714,0.11049 H 1.214245 q -0.09375,0 -0.154018,-0.0603 -0.060258,-0.0603 -0.060258,-0.15404 V 9.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 0.32142,0 0.58258,-0.10044 0.26117,-0.10045 0.46206,-0.30134 0.20089,-0.20089 0.34152,-0.41183 0.14062,-0.21094 0.30134,-0.51898 0.21428,-0.41517 0.52232,-1.14508 0.19419,-0.44197 0.33147,-0.74331 0.13728,-0.30134 0.36161,-0.70312 0.22433,-0.40179 0.42857,-0.66965 0.20424,-0.26785 0.49553,-0.5558 0.2913,-0.28795 0.60268,-0.45871 0.31139,-0.17075 0.71317,-0.28124 0.40179,-0.1105 0.85715,-0.1105 h 1.71428 V 1.85713 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z">
-                        </path>
-                    </g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M 5.459789,4.64957 Q 5.058009,5.26564 4.542379,6.4777 4.395059,6.17636 4.294609,5.9922 4.194169,5.80805 4.023409,5.56698 3.852649,5.32591 3.681889,5.18863 3.511129,5.05136 3.260009,4.95426 3.008899,4.85716 2.714259,4.85716 H 1.214255 q -0.09375,0 -0.154018,-0.0603 Q 0.999969,4.73666 0.999969,4.64287 V 3.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 1.6741,0 2.74553,1.5067 z m 7.54018,5.35045 q 0,0.0937 -0.0603,0.15402 l -2.14285,2.14285 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 v -1.28571 q -0.21428,0 -0.5692,0.003 -0.35491,0.003 -0.54241,0.007 -0.1875,0.003 -0.48884,-0.007 -0.30133,-0.0101 -0.47544,-0.0335 -0.17411,-0.0234 -0.42857,-0.0703 -0.25447,-0.0469 -0.42188,-0.12388 -0.16741,-0.077 -0.38839,-0.19085 -0.22098,-0.11384 -0.39509,-0.26786 -0.17411,-0.15401 -0.3683,-0.35825 -0.1942,-0.20425 -0.375,-0.46541 0.39509,-0.62276 0.91071,-1.82812 0.14732,0.30134 0.24777,0.48549 0.10044,0.18415 0.2712,0.42522 0.17076,0.24107 0.34152,0.37835 0.17076,0.13728 0.42188,0.23438 0.25111,0.0971 0.54576,0.0971 h 1.71428 V 7.85687 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z m 0,-6 q 0,0.0937 -0.0603,0.15401 l -2.14285,2.14286 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 V 4.85721 h -1.71428 q -0.32143,0 -0.58259,0.10045 -0.26116,0.10044 -0.46206,0.30134 -0.20089,0.20089 -0.34152,0.41183 -0.14062,0.21093 -0.30133,0.51897 -0.21429,0.41518 -0.52233,1.14509 -0.19419,0.44196 -0.33147,0.7433 -0.13728,0.30134 -0.36161,0.70313 -0.22433,0.40178 -0.42857,0.66964 -0.20424,0.26786 -0.49553,0.5558 -0.2913,0.28795 -0.60268,0.45871 -0.31139,0.17076 -0.71317,0.28125 -0.40179,0.11049 -0.85714,0.11049 H 1.214245 q -0.09375,0 -0.154018,-0.0603 -0.060258,-0.0603 -0.060258,-0.15404 V 9.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 0.32142,0 0.58258,-0.10044 0.26117,-0.10045 0.46206,-0.30134 0.20089,-0.20089 0.34152,-0.41183 0.14062,-0.21094 0.30134,-0.51898 0.21428,-0.41517 0.52232,-1.14508 0.19419,-0.44197 0.33147,-0.74331 0.13728,-0.30134 0.36161,-0.70312 0.22433,-0.40179 0.42857,-0.66965 0.20424,-0.26785 0.49553,-0.5558 0.2913,-0.28795 0.60268,-0.45871 0.31139,-0.17075 0.71317,-0.28124 0.40179,-0.1105 0.85715,-0.1105 h 1.71428 V 1.85713 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z">
-                        </path>
-                    </g>
-                </svg>
-            </button>
-            <button class="primary-outline" onclick="restart()">🆕</button>
-        </div>
+    <div id="step-3" class="step" style="display: none">
+      <h1>🏁</h1>
+      <p>✅ <span id="final-correct-count"></span></p>
+      <p>❌ <span id="final-error-count"></span></p>
+      <div class="button-section">
+        <button class="primary-outline" onclick="retry()">
+          <svg
+            width="32px"
+            height="32px"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M14 7H15.9992C19.3129 7 21.9992 9.68629 21.9992 13C21.9992 16.3137 19.3129 19 15.9992 19H8C4.68629 19 2 16.3137 2 13C2 9.68629 4.68629 7 8 7H10M7 4L10 7M10 7L7 10"
+                stroke="#ffffff"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+        </button>
+        <button class="primary-outline" onclick="regeneratePhrases()">
+          <svg
+            fill="#ffffff"
+            width="32px"
+            height="32px"
+            viewBox="0 0 14.00 14.00"
+            role="img"
+            focusable="false"
+            stroke="#ffffff"
+            stroke-width="0.00014"
+          >
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke="#0a0000"
+              stroke-width="0.6719999999999999"
+            >
+              <path
+                d="M 5.459789,4.64957 Q 5.058009,5.26564 4.542379,6.4777 4.395059,6.17636 4.294609,5.9922 4.194169,5.80805 4.023409,5.56698 3.852649,5.32591 3.681889,5.18863 3.511129,5.05136 3.260009,4.95426 3.008899,4.85716 2.714259,4.85716 H 1.214255 q -0.09375,0 -0.154018,-0.0603 Q 0.999969,4.73666 0.999969,4.64287 V 3.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 1.6741,0 2.74553,1.5067 z m 7.54018,5.35045 q 0,0.0937 -0.0603,0.15402 l -2.14285,2.14285 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 v -1.28571 q -0.21428,0 -0.5692,0.003 -0.35491,0.003 -0.54241,0.007 -0.1875,0.003 -0.48884,-0.007 -0.30133,-0.0101 -0.47544,-0.0335 -0.17411,-0.0234 -0.42857,-0.0703 -0.25447,-0.0469 -0.42188,-0.12388 -0.16741,-0.077 -0.38839,-0.19085 -0.22098,-0.11384 -0.39509,-0.26786 -0.17411,-0.15401 -0.3683,-0.35825 -0.1942,-0.20425 -0.375,-0.46541 0.39509,-0.62276 0.91071,-1.82812 0.14732,0.30134 0.24777,0.48549 0.10044,0.18415 0.2712,0.42522 0.17076,0.24107 0.34152,0.37835 0.17076,0.13728 0.42188,0.23438 0.25111,0.0971 0.54576,0.0971 h 1.71428 V 7.85687 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z m 0,-6 q 0,0.0937 -0.0603,0.15401 l -2.14285,2.14286 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 V 4.85721 h -1.71428 q -0.32143,0 -0.58259,0.10045 -0.26116,0.10044 -0.46206,0.30134 -0.20089,0.20089 -0.34152,0.41183 -0.14062,0.21093 -0.30133,0.51897 -0.21429,0.41518 -0.52233,1.14509 -0.19419,0.44196 -0.33147,0.7433 -0.13728,0.30134 -0.36161,0.70313 -0.22433,0.40178 -0.42857,0.66964 -0.20424,0.26786 -0.49553,0.5558 -0.2913,0.28795 -0.60268,0.45871 -0.31139,0.17076 -0.71317,0.28125 -0.40179,0.11049 -0.85714,0.11049 H 1.214245 q -0.09375,0 -0.154018,-0.0603 -0.060258,-0.0603 -0.060258,-0.15404 V 9.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 0.32142,0 0.58258,-0.10044 0.26117,-0.10045 0.46206,-0.30134 0.20089,-0.20089 0.34152,-0.41183 0.14062,-0.21094 0.30134,-0.51898 0.21428,-0.41517 0.52232,-1.14508 0.19419,-0.44197 0.33147,-0.74331 0.13728,-0.30134 0.36161,-0.70312 0.22433,-0.40179 0.42857,-0.66965 0.20424,-0.26785 0.49553,-0.5558 0.2913,-0.28795 0.60268,-0.45871 0.31139,-0.17075 0.71317,-0.28124 0.40179,-0.1105 0.85715,-0.1105 h 1.71428 V 1.85713 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z"
+              ></path>
+            </g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M 5.459789,4.64957 Q 5.058009,5.26564 4.542379,6.4777 4.395059,6.17636 4.294609,5.9922 4.194169,5.80805 4.023409,5.56698 3.852649,5.32591 3.681889,5.18863 3.511129,5.05136 3.260009,4.95426 3.008899,4.85716 2.714259,4.85716 H 1.214255 q -0.09375,0 -0.154018,-0.0603 Q 0.999969,4.73666 0.999969,4.64287 V 3.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 1.6741,0 2.74553,1.5067 z m 7.54018,5.35045 q 0,0.0937 -0.0603,0.15402 l -2.14285,2.14285 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 v -1.28571 q -0.21428,0 -0.5692,0.003 -0.35491,0.003 -0.54241,0.007 -0.1875,0.003 -0.48884,-0.007 -0.30133,-0.0101 -0.47544,-0.0335 -0.17411,-0.0234 -0.42857,-0.0703 -0.25447,-0.0469 -0.42188,-0.12388 -0.16741,-0.077 -0.38839,-0.19085 -0.22098,-0.11384 -0.39509,-0.26786 -0.17411,-0.15401 -0.3683,-0.35825 -0.1942,-0.20425 -0.375,-0.46541 0.39509,-0.62276 0.91071,-1.82812 0.14732,0.30134 0.24777,0.48549 0.10044,0.18415 0.2712,0.42522 0.17076,0.24107 0.34152,0.37835 0.17076,0.13728 0.42188,0.23438 0.25111,0.0971 0.54576,0.0971 h 1.71428 V 7.85687 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z m 0,-6 q 0,0.0937 -0.0603,0.15401 l -2.14285,2.14286 q -0.0603,0.0603 -0.15402,0.0603 -0.0871,0 -0.15067,-0.0636 -0.0636,-0.0636 -0.0636,-0.15067 V 4.85721 h -1.71428 q -0.32143,0 -0.58259,0.10045 -0.26116,0.10044 -0.46206,0.30134 -0.20089,0.20089 -0.34152,0.41183 -0.14062,0.21093 -0.30133,0.51897 -0.21429,0.41518 -0.52233,1.14509 -0.19419,0.44196 -0.33147,0.7433 -0.13728,0.30134 -0.36161,0.70313 -0.22433,0.40178 -0.42857,0.66964 -0.20424,0.26786 -0.49553,0.5558 -0.2913,0.28795 -0.60268,0.45871 -0.31139,0.17076 -0.71317,0.28125 -0.40179,0.11049 -0.85714,0.11049 H 1.214245 q -0.09375,0 -0.154018,-0.0603 -0.060258,-0.0603 -0.060258,-0.15404 V 9.35716 q 0,-0.0937 0.06027,-0.15402 0.06027,-0.0603 0.154018,-0.0603 h 1.500004 q 0.32142,0 0.58258,-0.10044 0.26117,-0.10045 0.46206,-0.30134 0.20089,-0.20089 0.34152,-0.41183 0.14062,-0.21094 0.30134,-0.51898 0.21428,-0.41517 0.52232,-1.14508 0.19419,-0.44197 0.33147,-0.74331 0.13728,-0.30134 0.36161,-0.70312 0.22433,-0.40179 0.42857,-0.66965 0.20424,-0.26785 0.49553,-0.5558 0.2913,-0.28795 0.60268,-0.45871 0.31139,-0.17075 0.71317,-0.28124 0.40179,-0.1105 0.85715,-0.1105 h 1.71428 V 1.85713 q 0,-0.0937 0.0603,-0.15402 0.0603,-0.0603 0.15402,-0.0603 0.0803,0 0.16071,0.067 l 2.13616,2.13616 q 0.0603,0.0603 0.0603,0.15402 z"
+              ></path>
+            </g>
+          </svg>
+        </button>
+        <button class="primary-outline" onclick="restart()">🆕</button>
+      </div>
     </div>
 
-    <div id="upload-popup" class="popup" style="display: none;">
-        <div class="popup-content">
-            <span class="close" onclick="closeUploadPopup()">&times;</span>
-            <label for="language-select">Select Language:</label>
-            <select id="language-select">
-                <option value="en-US">English (United States)</option>
-                <option value="en-GB">English (United Kingdom)</option>
-                <option value="es-ES">Español (España)</option>
-                <option value="fr-FR">Français (France)</option>
-                <option value="de-DE">Deutsch (Deutschland)</option>
-                <option value="it-IT">Italiano (Italia)</option>
-                <option value="pt-PT">Português (Portugal)</option>
-                <option value="pt-BR">Português (Brasil)</option>
-                <option value="ru-RU">Русский (Россия)</option>
-                <option value="zh-CN">中文 (中国)</option>
-                <option value="ja-JP">日本語 (日本)</option>
-                <option value="ko-KR">한국어 (대한민국)</option>
-            </select>
-            <label for="file-input-popup">📝</label>
-            <input type="file" id="file-input-popup">
-            <button onclick="handleFileSelectFromPopup()">📤</button>
-        </div>
+    <div id="upload-popup" class="popup" style="display: none">
+      <div class="popup-content">
+        <span class="close" onclick="closeUploadPopup()">&times;</span>
+        <label for="language-select">Select Language:</label>
+        <select id="language-select">
+          <option value="en-US">English (United States)</option>
+          <option value="en-GB">English (United Kingdom)</option>
+          <option value="es-ES">Español (España)</option>
+          <option value="fr-FR">Français (France)</option>
+          <option value="de-DE">Deutsch (Deutschland)</option>
+          <option value="it-IT">Italiano (Italia)</option>
+          <option value="pt-PT">Português (Portugal)</option>
+          <option value="pt-BR">Português (Brasil)</option>
+          <option value="ru-RU">Русский (Россия)</option>
+          <option value="zh-CN">中文 (中国)</option>
+          <option value="ja-JP">日本語 (日本)</option>
+          <option value="ko-KR">한국어 (대한민국)</option>
+        </select>
+        <label for="file-input-popup">📝</label>
+        <input type="file" id="file-input-popup" />
+        <button onclick="handleFileSelectFromPopup()">📤</button>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
     <script src="js/recognition.js"></script>
     <script src="js/main.js"></script>
-</body>
-
+  </body>
 </html>
